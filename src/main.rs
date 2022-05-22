@@ -1,3 +1,5 @@
+use std::{io, io::prelude::*};
+
 use clap::{ArgEnum, Parser};
 
 /// Pipe stdin to stdout if stdin matches a hash
@@ -39,4 +41,7 @@ fn main() {
         let algorithm = get_hash_function(cli.hash).unwrap();
         println!("Detected value for algorithm: {:?}", algorithm);
     }
+
+    let lines: String = io::stdin().lock().lines().fold(String::new(), |s, l| s + &l.unwrap() + "\n");
+    println!("{}", lines);
 }
