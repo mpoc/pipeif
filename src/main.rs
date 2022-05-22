@@ -43,5 +43,8 @@ fn main() {
     }
 
     let lines: String = io::stdin().lock().lines().fold(String::new(), |s, l| s + &l.unwrap() + "\n");
-    println!("{}", lines);
+
+    let digest = md5::compute(lines);
+    let digest_str = format!("{:x}", digest);
+    println!("{}", digest_str);
 }
