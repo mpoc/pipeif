@@ -20,11 +20,23 @@ enum HashAlgorithm {
     Sha512,
 }
 
+fn get_hash_function(hash: String) -> Result<HashAlgorithm, &'static str> {
+    match hash.len() {
+        32 => Ok(HashAlgorithm::Md5),
+        64 => Ok(HashAlgorithm::Sha256),
+        128 => Ok(HashAlgorithm::Sha512),
+        _ => Err("Could not detect hash algorithm"),
+    }
+}
+
 fn main() {
     let cli = Cli::parse();
-    println!("name: {:?}", cli.hash);
+    println!("Hash: {:?}", cli.hash);
 
     if let Some(algorithm) = cli.algorithm {
         println!("Value for algorithm: {:?}", algorithm);
+    } else {
+        let algorithm = get_hash_function(cli.hash).unwrap();
+        println!("Detected value for algorithm: {:?}", algorithm);
     }
 }
