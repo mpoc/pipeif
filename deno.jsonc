@@ -1,0 +1,13 @@
+{
+  "fmt": {
+    "options": {
+      "singleQuote": true,
+      "semiColons": false,
+      "indentWidth": 4,
+      "useTabs": false
+    },
+    "files": {
+      "include": ["pipeif.ts"]
+    }
+  }
+}
